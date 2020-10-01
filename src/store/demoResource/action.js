@@ -7,11 +7,11 @@ export const getDemoList = () => {
   return async dispatch => {
     try {
       let url = 'http://0.0.0.0:8400/api/v1/surveys';
-      const data = await axios.get(url);
-
+      const response = await axios.get(url);
+      
       return dispatch({
         type: GET_DEMO_LIST,
-        payload: data.results
+        payload: response.data
       });
     } catch (error) {
       alert(error);

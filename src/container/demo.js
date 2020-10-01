@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getDemoList } from '../store/demoResource/action'
 
 
-function App() {
+function Demo() {
+  const dispatch = useDispatch();
+  const list = [1,2,3,4]
+
+  useEffect(() => {
+    dispatch(getDemoList());
+  }, [dispatch]);
+
+  const { results } = useSelector(
+    (state) => state.demo
+  );
+
+  const listItems = list.map((item) =>
+    <li key={item.toString()}>{item}</li>
+  )
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        {/* <FriendStatus /> */}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="demo">
+      <ul>
+        {listItems}
+      </ul>
     </div>
   );
 }
 
-export default App;
+export default Demo;
